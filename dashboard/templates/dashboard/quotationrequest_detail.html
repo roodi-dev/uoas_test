@@ -1,0 +1,99 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Quotation Request Details | Dashboard{% endblock %}
+{% block content %}
+    <div style="max-width: 800px; margin: 0 auto;">
+        <div style="display: flex; align-items: center; margin-bottom: 30px;">
+            <div style="font-size: 2rem; margin-right: 15px;">📋</div>
+            <div>
+                <h1 style="margin: 0; color: #2c3e50;">Quotation Request Details</h1>
+                <p style="color: #666; margin: 5px 0 0 0; font-size: 1rem;">Review customer inquiry details</p>
+            </div>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="messages{% if message.tags %} {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 30px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+
+                <!-- Customer Information -->
+                <div style="background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1)); border-radius: 12px; padding: 25px; border: 1px solid rgba(102,126,234,0.2);">
+                    <h3 style="margin: 0 0 20px 0; color: #2c3e50; display: flex; align-items: center;">
+                        👤 Customer Information
+                    </h3>
+
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div>
+                            <label style="font-weight: 600; color: #666; font-size: 0.9rem;">📧 Email Address</label>
+                            <div style="font-weight: 600; color: #2c3e50; margin-top: 5px;">{{ quotation.email }}</div>
+                        </div>
+
+                        <div>
+                            <label style="font-weight: 600; color: #666; font-size: 0.9rem;">📅 Request Date</label>
+                            <div style="font-weight: 600; color: #2c3e50; margin-top: 5px;">
+                                {{ quotation.requested_at|date:'F d, Y' }} at {{ quotation.requested_at|time:'H:i' }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Information -->
+                <div style="background: linear-gradient(135deg, rgba(243,156,18,0.1), rgba(231,76,60,0.1)); border-radius: 12px; padding: 25px; border: 1px solid rgba(243,156,18,0.2);">
+                    <h3 style="margin: 0 0 20px 0; color: #2c3e50; display: flex; align-items: center;">
+                        📦 Product Details
+                    </h3>
+
+                    <div style="display: flex; flex-direction: column; gap: 15px;">
+                        <div>
+                            <label style="font-weight: 600; color: #666; font-size: 0.9rem;">📄 Product Name</label>
+                            <div style="font-weight: 600; color: #2c3e50; margin-top: 5px;">{{ quotation.product.name }}</div>
+                        </div>
+
+                        <div>
+                            <label style="font-weight: 600; color: #666; font-size: 0.9rem;">🔢 Quantity Requested</label>
+                            <div style="font-weight: 600; color: #2c3e50; margin-top: 5px;">
+                                <span style="background: linear-gradient(135deg, #f39c12, #e67e22); color: white; padding: 4px 10px; border-radius: 15px; font-size: 0.9rem;">
+                                    {{ quotation.quantity }} units
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Customer Notes -->
+            {% if quotation.notes %}
+            <div style="margin-top: 30px; background: linear-gradient(135deg, rgba(52,152,219,0.1), rgba(41,128,185,0.1)); border-radius: 12px; padding: 25px; border: 1px solid rgba(52,152,219,0.2);">
+                <h3 style="margin: 0 0 20px 0; color: #2c3e50; display: flex; align-items: center;">
+                    📝 Customer Notes
+                </h3>
+                <div style="background: white; border-radius: 8px; padding: 20px; border-left: 4px solid #3498db;">
+                    {{ quotation.notes|linebreaksbr }}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; gap: 15px; justify-content: center; margin-bottom: 40px;">
+            <a href="mailto:{{ quotation.email }}?subject=Re: Quotation Request for {{ quotation.product.name }}&body=Dear Customer,%0A%0AThank you for your interest in {{ quotation.product.name }}.%0A%0AWe have received your request for {{ quotation.quantity }} units.%0A%0APlease let us know if you need any additional information.%0A%0ABest regards,%0A{{ manager.username }}" class="btn btn-primary" style="text-decoration: none;">
+                📧 Reply via Email
+            </a>
+            <a href="{% url 'dashboard_quotationrequest_list' %}" class="btn btn-secondary" style="text-decoration: none;">
+                📋 Back to Requests
+            </a>
+            <a href="{% url 'dashboard_quotationrequest_delete' quotation.pk %}" class="btn btn-danger" style="text-decoration: none;">
+                🗑️ Delete Request
+            </a>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="{% url 'dashboard_home' %}" class="back-link">🏠 Back to Dashboard</a>
+        </div>
+    </div>
+{% endblock %}

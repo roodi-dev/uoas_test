@@ -1,0 +1,92 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Manage Products | Dashboard{% endblock %}
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <div>
+            <h1 style="margin: 0;">📦 Manage Products</h1>
+            <p style="color: #666; margin: 5px 0 0 0; font-size: 1rem;">Organize and manage your product catalog</p>
+        </div>
+        <a href="{% url 'dashboard_product_add' %}" class="add-link" style="margin: 0;">
+            <span style="font-size: 1.2rem; margin-right: 8px;">+</span>Add New Product
+        </a>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="messages{% if message.tags %} {{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if products %}
+        <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin: 0; color: #2c3e50;">Product Inventory ({{ products|length }} items)</h3>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <span style="font-size: 0.9rem; color: #666;">In Stock:</span>
+                    <span style="background: #28a745; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">
+                        {{ products|length }} items
+                    </span>
+                </div>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%;">📄 Product Name</th>
+                            <th style="width: 25%;">🏷️ Category</th>
+                            <th style="width: 15%;">📊 Stock Status</th>
+                            <th style="width: 30%;">⚙️ Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for product in products %}
+                        <tr>
+                            <td style="font-weight: 600; color: #2c3e50;">{{ product.name }}</td>
+                            <td>
+                                <span style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 4px 10px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">
+                                    {{ product.get_product_type_display }}
+                                </span>
+                            </td>
+                            <td>
+                                {% if product.in_stock %}
+                                    <span style="background: #28a745; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">
+                                        ✅ In Stock
+                                    </span>
+                                {% else %}
+                                    <span style="background: #dc3545; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">
+                                        ❌ Out of Stock
+                                    </span>
+                                {% endif %}
+                            </td>
+                            <td class="actions">
+                                <a class="edit-btn" href="{% url 'dashboard_product_edit' product.pk %}" style="margin-right: 8px;">
+                                    ✏️ Edit
+                                </a>
+                                <a class="delete-btn" href="{% url 'dashboard_product_delete' product.pk %}">
+                                    🗑️ Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 60px 20px; background: rgba(255,255,255,0.9); border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <div style="font-size: 4rem; margin-bottom: 20px;">📦</div>
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">No Products Yet</h3>
+            <p style="color: #666; margin-bottom: 30px;">Start building your product catalog by adding your first product.</p>
+            <a href="{% url 'dashboard_product_add' %}" class="add-link" style="display: inline-block;">
+                <span style="font-size: 1.2rem; margin-right: 8px;">+</span>Create Your First Product
+            </a>
+        </div>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="{% url 'dashboard_home' %}" class="back-link">🏠 Back to Dashboard</a>
+    </div>
+{% endblock %}

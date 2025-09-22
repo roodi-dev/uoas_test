@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block title %}Order Confirmation | uoas{% endblock %}
+{% block content %}
+<div class="order-confirmation-container">
+    <h2>Thank you for your order!</h2>
+    <p>Your order has been successfully placed. You will be redirected to the home page shortly.</p>
+
+    <h3>Order Details</h3>
+    <table class="order-details-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Price (each)</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in order_items %}
+            <tr>
+                <td>{{ item.product.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>R{{ item.price }}</td>
+                <td>R{{ item.price|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" style="text-align:right; font-weight:bold;">Total:</td>
+                <td>R{{ order.total_price }}</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<script>
+    // Redirect to home page after 5 seconds
+    setTimeout(function() {
+        window.location.href = '/';
+    }, 5000);
+</script>
+
+<style>
+.order-confirmation-container {
+    max-width: 700px;
+    margin: 80px auto;
+    padding: 40px 30px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #0a3d62;
+}
+.order-confirmation-container h2 {
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.order-confirmation-container h3 {
+    font-size: 1.8rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.order-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+.order-details-table th,
+.order-details-table td {
+    border: 1px solid #0a3d62;
+    padding: 10px 15px;
+    font-size: 1rem;
+}
+.order-details-table th {
+    background-color: #0a3d62;
+    color: white;
+    text-transform: uppercase;
+}
+.order-details-table td {
+    color: #333;
+}
+.order-details-table tfoot td {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.order-details-table tfoot td[colspan="3"] {
+    text-align: right;
+}
+</style>
+{% endblock %}

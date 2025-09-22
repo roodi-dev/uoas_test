@@ -1,0 +1,75 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}{{ action }} Product | Dashboard{% endblock %}
+{% block content %}
+    <div style="max-width: 600px; margin: 0 auto;">
+        <div style="display: flex; align-items: center; margin-bottom: 30px;">
+            <div style="font-size: 2rem; margin-right: 15px;">{% if action == 'Add' %}➕{% else %}✏️{% endif %}</div>
+            <div>
+                <h1 style="margin: 0; color: #2c3e50;">{{ action }} Product</h1>
+                <p style="color: #666; margin: 5px 0 0 0; font-size: 1rem;">{% if action == 'Add' %}Create a new product for your catalog{% else %}Update product information{% endif %}</p>
+            </div>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="messages{% if message.tags %} {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="{{ form.name.id_for_label }}">📄 Product Name</label>
+                    {{ form.name }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.product_type.id_for_label }}">🏷️ Product Category</label>
+                    {{ form.product_type }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.description.id_for_label }}">📝 Description</label>
+                    {{ form.description }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.image_url.id_for_label }}">🔗 Image URL (optional)</label>
+                    {{ form.image_url }}
+                    <small style="color: #666; font-size: 0.9rem;">Enter a URL for the product image</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.image.id_for_label }}">📎 Upload Image (optional)</label>
+                    {{ form.image }}
+                    <small style="color: #666; font-size: 0.9rem;">Or upload an image file directly</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.in_stock.id_for_label }}">📦 Stock Status</label>
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        {{ form.in_stock }}
+                        <span style="color: #666; font-size: 0.9rem;">Mark as available for sale</span>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; gap: 15px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">
+                        {% if action == 'Add' %}➕ Create Product{% else %}💾 Save Changes{% endif %}
+                    </button>
+                    <a href="{% url 'dashboard_product_list' %}" class="btn btn-secondary" style="text-decoration: none;">
+                        ❌ Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="{% url 'dashboard_product_list' %}" class="back-link">📦 Back to Products</a>
+        </div>
+    </div>
+{% endblock %}

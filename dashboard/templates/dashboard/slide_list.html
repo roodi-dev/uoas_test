@@ -1,0 +1,80 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Manage Slides | Dashboard{% endblock %}
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <div>
+            <h1 style="margin: 0;">🖼️ Manage Slides</h1>
+            <p style="color: #666; margin: 5px 0 0 0; font-size: 1rem;">Control your homepage slideshow content</p>
+        </div>
+        <a href="{% url 'dashboard_slide_add' %}" class="add-link" style="margin: 0;">
+            <span style="font-size: 1.2rem; margin-right: 8px;">+</span>Add New Slide
+        </a>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="messages{% if message.tags %} {{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if slides %}
+        <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin: 0; color: #2c3e50;">Slides ({{ slides|length }} items)</h3>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">🖼️ Image</th>
+                            <th style="width: 25%;">📍 Location</th>
+                            <th style="width: 25%;">🔗 Project Link</th>
+                            <th style="width: 25%;">⚙️ Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for slide in slides %}
+                        <tr>
+                            <td>
+                                {% if slide.image %}
+                                    <img src="{{ slide.image.url }}" alt="Slide image" style="max-width: 120px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                {% elif slide.image_url %}
+                                    <img src="{{ slide.image_url }}" alt="Slide image" style="max-width: 120px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                                {% else %}
+                                    No image
+                                {% endif %}
+                            </td>
+                            <td style="font-weight: 600; color: #2c3e50;">{{ slide.location }}</td>
+                            <td><a href="{{ slide.project_link }}" target="_blank" style="color: #667eea; font-weight: 600;">View Project</a></td>
+                            <td class="actions">
+                                <a class="edit-btn" href="{% url 'dashboard_slide_edit' slide.pk %}" style="margin-right: 8px;">
+                                    ✏️ Edit
+                                </a>
+                                <a class="delete-btn" href="{% url 'dashboard_slide_delete' slide.pk %}">
+                                    🗑️ Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 60px 20px; background: rgba(255,255,255,0.9); border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <div style="font-size: 4rem; margin-bottom: 20px;">🖼️</div>
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">No Slides Yet</h3>
+            <p style="color: #666; margin-bottom: 30px;">Add slides to showcase your projects on the homepage.</p>
+            <a href="{% url 'dashboard_slide_add' %}" class="add-link" style="display: inline-block;">
+                <span style="font-size: 1.2rem; margin-right: 8px;">+</span>Create Your First Slide
+            </a>
+        </div>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="{% url 'dashboard_home' %}" class="back-link">🏠 Back to Dashboard</a>
+    </div>
+{% endblock %}

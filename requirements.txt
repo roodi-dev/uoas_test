@@ -1,0 +1,21 @@
+# Core Dependencies
+Django==5.0.7
+Pillow==11.2.1
+
+# Django Dependencies (automatically installed with Django)
+asgiref==3.8.1
+sqlparse==0.5.1
+tzdata==2024.1
+
+# Development Dependencies
+pip==25.2
+virtualenv==20.26.3
+
+# Optional: Database drivers (uncomment based on your database choice)
+# mysqlclient==2.2.0  # For MySQL
+# psycopg2-binary==2.9.7  # For PostgreSQL
+
+# Optional: Additional packages you might need
+# django-cors-headers==4.3.1  # For CORS handling
+# django-environ==0.11.2  # For environment variable management
+# whitenoise==6.6.0  # For serving static files in production

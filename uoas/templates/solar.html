@@ -1,0 +1,402 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Solar Services - uoas{% endblock %}
+
+{% block extra_head %}
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="{% static 'solar-styles.css' %}" />
+{% endblock %}
+
+{% block content %}
+<section id="hero-solar" class="hero-section section-spacing">
+    <div class="container hero-solar-content">
+        <h1 class="hero-title animate-fade-in">Solar Department</h1>
+        <p class="hero-subtitle animate-slide-up">Sustainable energy solutions tailored to your needs.</p>
+        <div class="hero-stats animate-scale-in">
+            <div class="stat-item">
+                <span class="stat-number counter" data-target="500">0</span>
+                <span class="stat-label">Projects Completed</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number counter" data-target="98">0</span>
+                <span class="stat-label">Customer Satisfaction</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number counter" data-target="10">0</span>
+                <span class="stat-label">Years Experience</span>
+            </div>
+        </div>
+        <div class="hero-buttons animate-slide-up-delay">
+            <a href="#our-solutions" class="btn btn-primary">Explore Solutions</a>
+            <a href="{% url 'contact' %}" class="btn btn-secondary">Get Free Quote</a>
+        </div>
+    </div>
+    <div class="hero-solar-overlay"></div>
+    <div class="hero-particles"></div>
+</section>
+
+<section id="our-solutions" class="solutions-section section-spacing">
+    <div class="container">
+        <h2 class="section-title">Our Solar Solutions</h2>
+        <p class="section-description">Choose from our comprehensive range of solar energy solutions designed to meet your specific needs and budget.</p>
+        <div class="solutions-grid">
+            <article class="solution-card animate-on-scroll" data-solution="standard">
+                <div class="solution-icon">
+                    <img src="https://www.onesolar.co.za/wp-content/uploads/2024/06/One-Solar-Circles_1-Standard-Home-Blue-Yellow.svg" alt="Standard Home" />
+                </div>
+                <div class="solution-content">
+                    <h3>Standard Home</h3>
+                    <p>Complete solar system for residential homes with 3-5kW capacity. Perfect for average household energy needs.</p>
+                    <div class="solution-features">
+                        <span class="feature">✓ 3-5kW System</span>
+                        <span class="feature">✓ Battery Storage</span>
+                        <span class="feature">✓ 25 Year Warranty</span>
+                    </div>
+                    <button class="learn-more-btn" onclick="openSolutionModal('standard')">Learn More</button>
+                </div>
+                <div class="card-glow"></div>
+            </article>
+
+            <article class="solution-card animate-on-scroll" data-solution="tailored">
+                <div class="solution-icon">
+                    <img src="https://www.onesolar.co.za/wp-content/uploads/2024/06/One-Solar-Circles_2-Tailored-Home-Blue-Yellow.svg" alt="Tailored Home" />
+                </div>
+                <div class="solution-content">
+                    <h3>Tailored Home</h3>
+                    <p>Custom-designed solar solutions for unique home requirements, high energy usage, or specific architectural constraints.</p>
+                    <div class="solution-features">
+                        <span class="feature">✓ Custom Design</span>
+                        <span class="feature">✓ High Capacity</span>
+                        <span class="feature">✓ Smart Integration</span>
+                    </div>
+                    <button class="learn-more-btn" onclick="openSolutionModal('tailored')">Learn More</button>
+                </div>
+                <div class="card-glow"></div>
+            </article>
+
+            <article class="solution-card animate-on-scroll" data-solution="commercial">
+                <div class="solution-icon">
+                    <img src="https://www.onesolar.co.za/wp-content/uploads/2024/06/One-Solar-Circles_3-Commercial-Savings-Blue-Yellow.svg" alt="Commercial Savings" />
+                </div>
+                <div class="solution-content">
+                    <h3>Commercial Savings</h3>
+                    <p>Large-scale solar installations for businesses, warehouses, and commercial properties with significant energy cost savings.</p>
+                    <div class="solution-features">
+                        <span class="feature">✓ 50kW+ Systems</span>
+                        <span class="feature">✓ ROI in 4-6 Years</span>
+                        <span class="feature">✓ Tax Incentives</span>
+                    </div>
+                    <div class="solution-price">
+                        <span class="price">Contact Us</span>
+                        <span class="period">for quote</span>
+                    </div>
+                    <button class="learn-more-btn" onclick="openSolutionModal('commercial')">Learn More</button>
+                </div>
+                <div class="card-glow"></div>
+            </article>
+
+            <article class="solution-card animate-on-scroll" data-solution="independence">
+                <div class="solution-icon">
+                    <img src="https://www.onesolar.co.za/wp-content/uploads/2024/06/One-Solar-Circles_4-Commercial-Independence-Blue-Yellow.svg" alt="Commercial Independence" />
+                </div>
+                <div class="solution-content">
+                    <h3>Commercial Independence</h3>
+                    <p>Complete energy independence solutions for businesses wanting to break free from Eskom's rising electricity costs.</p>
+                    <div class="solution-features">
+                        <span class="feature">✓ Full Independence</span>
+                        <span class="feature">✓ Battery Backup</span>
+                        <span class="feature">✓ 24/7 Power</span>
+                    </div>
+                    <div class="solution-price">
+                        <span class="price">Custom Quote</span>
+                        <span class="period">required</span>
+                    </div>
+                    <button class="learn-more-btn" onclick="openSolutionModal('independence')">Learn More</button>
+                </div>
+                <div class="card-glow"></div>
+            </article>
+
+            <article class="solution-card animate-on-scroll" data-solution="future">
+                <div class="solution-icon">
+                    <img src="https://www.onesolar.co.za/wp-content/uploads/2024/06/One-Solar-Circles_5-Future-Modification-Blue-Yellow.svg" alt="Future Modification" />
+                </div>
+                <div class="solution-content">
+                    <h3>Future Modification</h3>
+                    <p>Scalable solar systems designed for future expansion, allowing you to add more panels and batteries as your needs grow.</p>
+                    <div class="solution-features">
+                        <span class="feature">✓ Scalable Design</span>
+                        <span class="feature">✓ Future-Proof</span>
+                        <span class="feature">✓ Easy Expansion</span>
+                    </div>
+                    <button class="learn-more-btn" onclick="openSolutionModal('future')">Learn More</button>
+                </div>
+                <div class="card-glow"></div>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section id="committed-optimal-solutions" class="commitments-section section-spacing">
+    <div class="container">
+        <h2 class="section-title">Why Choose Our Solar Solutions</h2>
+        <p class="section-description">We are dedicated to providing optimal solar solutions that deliver real value and long-term benefits.</p>
+        <div class="commitment-blocks">
+            <div class="commitment-block animate-on-scroll">
+                <div class="commitment-icon">⚡</div>
+                <h4>Reliable & Sustainable</h4>
+                <p>High-quality solar panels and inverters with 25-year performance warranties.</p>
+            </div>
+            <div class="commitment-block animate-on-scroll">
+                <div class="commitment-icon">👥</div>
+                <h4>Expert Consultation</h4>
+                <p>Free site assessment and personalized solar system design by certified engineers.</p>
+            </div>
+            <div class="commitment-block animate-on-scroll">
+                <div class="commitment-icon">🔧</div>
+                <h4>Complete Installation</h4>
+                <p>Professional installation with ongoing maintenance and support services.</p>
+            </div>
+            <div class="commitment-block animate-on-scroll">
+                <div class="commitment-icon">💰</div>
+                <h4>Flexible Financing</h4>
+                <p>Various payment options including cash, finance, and solar rental agreements.</p>
+            </div>
+            <div class="commitment-block animate-on-scroll">
+                <div class="commitment-icon">📊</div>
+                <h4>Performance Monitoring</h4>
+                <p>Real-time monitoring of your solar system's performance and energy savings.</p>
+            </div>
+            <div class="commitment-block animate-on-scroll">
+                <div class="commitment-icon">🛡️</div>
+                <h4>Comprehensive Warranty</h4>
+                <p>Full system warranty coverage with rapid response technical support.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="testimonials" class="testimonials-section section-spacing">
+    <div class="container">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <p class="section-description">Don't just take our word for it - hear from our satisfied customers.</p>
+        <div class="testimonials-grid">
+            <div class="testimonial-card animate-on-scroll">
+                <div class="testimonial-content">
+                    <p>"Excellent service from start to finish. The team was professional, the installation was flawless, and our electricity bills have dropped by 80%. Highly recommended!"</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MJ</div>
+                    <div class="author-info">
+                        <h4>Maria Johnson</h4>
+                        <span>Sandton Home Owner</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card animate-on-scroll">
+                <div class="testimonial-content">
+                    <p>"The commercial solar installation has transformed our business. We've achieved energy independence and significant cost savings. The ROI was better than expected."</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">PK</div>
+                    <div class="author-info">
+                        <h4>Peter Khumalo</h4>
+                        <span>Warehouse Owner</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card animate-on-scroll">
+                <div class="testimonial-content">
+                    <p>"Outstanding technical support and maintenance service. They've been there for us every step of the way. Choosing uoas for our solar needs was the best decision."</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">LS</div>
+                    <div class="author-info">
+                        <h4>Linda Smit</h4>
+                        <span>Restaurant Owner</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="our-projects" class="projects-section section-spacing">
+    <div class="container">
+        <h2 class="section-title">Our Recent Projects</h2>
+        <p class="section-description">Explore some of the solar installations we have completed across various locations in South Africa.</p>
+        <div class="slideshow-container" aria-label="Project slideshow">
+            <div class="projects-slider">
+                {% for slide in slides %}
+                <div class="slide">
+                    {% if slide.image %}
+                        <img src="{{ slide.image.url }}" alt="Project {{ forloop.counter }}" loading="lazy" />
+                    {% elif slide.image_url %}
+                        <img src="{{ slide.image_url }}" alt="Project {{ forloop.counter }}" loading="lazy" />
+                    {% else %}
+                        <div class="no-image">
+                            <div class="no-image-content">
+                                <i class="fas fa-solar-panel"></i>
+                                <p>Project Image Coming Soon</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <div class="slide-caption">
+                        <h3>{{ slide.location }}</h3>
+                        <p>Solar Installation Project</p>
+                        <a href="{{ slide.project_link }}" class="view-project-link" target="_blank">View Details &#8594;</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="slideshow-controls">
+                <button class="control-btn" id="prev-btn" onclick="previousSlide()" aria-label="Previous Slide">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="control-btn" id="play-pause-btn" onclick="toggleSlideshow()" aria-label="Play/Pause Slideshow">
+                    <i class="fas fa-pause" id="play-pause-icon"></i>
+                </button>
+                <button class="control-btn" id="next-btn" onclick="nextSlide()" aria-label="Next Slide">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="slideshow-indicators">
+                {% for slide in slides %}
+                <span class="indicator" onclick="goToSlide({{ forloop.counter0 }})"></span>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="projects-cta">
+            <a href="{% url 'solar_projects' %}" class="btn btn-outline">View All Projects</a>
+        </div>
+    </div>
+</section>
+
+<section id="case-studies" class="case-studies-section section-spacing">
+    <div class="container">
+        <h2 class="section-title">Case Studies</h2>
+        <p class="section-description">Detailed analysis of our most successful solar installations and their impact.</p>
+        <div class="case-studies-grid">
+            <div class="case-study-card animate-on-scroll">
+                <div class="case-study-image">
+                    <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?w=400" alt="Residential Case Study" loading="lazy" />
+                    <div class="case-study-overlay">
+                        <span class="case-study-type">Residential</span>
+                    </div>
+                </div>
+                <div class="case-study-content">
+                    <h3>Sandton Family Home</h3>
+                    <p>5kW system installed for a family of four, achieving 85% self-sufficiency and R12,000 annual savings.</p>
+                    <div class="case-study-metrics">
+                        <div class="metric">
+                            <span class="metric-value">85%</span>
+                            <span class="metric-label">Self-Sufficiency</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">R12k</span>
+                            <span class="metric-label">Annual Savings</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">4.2</span>
+                            <span class="metric-label">Year Payback</span>
+                        </div>
+                    </div>
+                    <a href="#" class="read-more-link">Read Full Case Study</a>
+                </div>
+            </div>
+
+            <div class="case-study-card animate-on-scroll">
+                <div class="case-study-image">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400" alt="Commercial Case Study" loading="lazy" />
+                    <div class="case-study-overlay">
+                        <span class="case-study-type">Commercial</span>
+                    </div>
+                </div>
+                <div class="case-study-content">
+                    <h3>Midrand Warehouse</h3>
+                    <p>50kW commercial installation reducing electricity costs by 75% and achieving full energy independence.</p>
+                    <div class="case-study-metrics">
+                        <div class="metric">
+                            <span class="metric-value">100%</span>
+                            <span class="metric-label">Independence</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">R85k</span>
+                            <span class="metric-label">Monthly Savings</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">3.8</span>
+                            <span class="metric-label">Year Payback</span>
+                        </div>
+                    </div>
+                    <a href="#" class="read-more-link">Read Full Case Study</a>
+                </div>
+            </div>
+
+            <div class="case-study-card animate-on-scroll">
+                <div class="case-study-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400" alt="Agricultural Case Study" loading="lazy" />
+                    <div class="case-study-overlay">
+                        <span class="case-study-type">Agricultural</span>
+                    </div>
+                </div>
+                <div class="case-study-content">
+                    <h3>Gauteng Farm</h3>
+                    <p>25kW agricultural installation powering irrigation systems and farm operations with significant cost reductions.</p>
+                    <div class="case-study-metrics">
+                        <div class="metric">
+                            <span class="metric-value">90%</span>
+                            <span class="metric-label">Cost Reduction</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">R45k</span>
+                            <span class="metric-label">Annual Savings</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">5.1</span>
+                            <span class="metric-label">Year Payback</span>
+                        </div>
+                    </div>
+                    <a href="#" class="read-more-link">Read Full Case Study</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="get-in-touch-today" class="contact-section section-spacing">
+    <div class="container">
+        <h2 class="section-title">Get in Touch Today</h2>
+        <p>Have questions or want to learn more about our solar solutions? Contact us now and our team will be happy to assist you.</p>
+        <div class="contact-buttons">
+            <a href="{% url 'contact' %}" class="btn btn-primary">
+                <i class="fas fa-envelope"></i>
+                Contact Us
+            </a>
+            <a href="tel:+27118231730" class="btn btn-secondary">
+                <i class="fas fa-phone"></i>
+                Call Us: +27 (11) 823-1730
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Solution Modal -->
+<div id="solution-modal" class="modal" tabindex="-1" aria-modal="true" role="dialog" aria-labelledby="modal-title" style="display:none;">
+    <div class="modal-content">
+        <button class="close-modal" onclick="closeSolutionModal()" aria-label="Close Modal">&times;</button>
+        <div id="modal-content">
+            <!-- Modal content will be populated by JavaScript -->
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'slide.js' %}"></script>
+<script src="{% static 'solar-enhancements.js' %}"></script>
+{% endblock %}
+<script src="{% static 'slide.js' %}"></script>
+<script src="{% static 'solar-enhancements.js' %}"></script>
+
+{% endblock %}

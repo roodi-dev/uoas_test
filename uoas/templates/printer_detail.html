@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}{{ printer.name }} - Printer Details{% endblock %}
+
+{% block content %}
+<section id="printer-detail" role="region" aria-label="Printer Details" style="max-width: 900px; margin: 2rem auto; padding: 1rem; background-color: #f9f9f9; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+    <h2 style="font-size: 2rem; margin-bottom: 1rem; color: #333;">{{ printer.name }}</h2>
+    <img src="{{ printer.image_url }}" alt="{{ printer.name }} printer" style="width: 100%; max-width: 400px; height: auto; display: block; margin-bottom: 1rem; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,0.1);" />
+    <p style="font-size: 1.1rem; line-height: 1.6; color: #555; margin-bottom: 1.5rem;">{{ printer.description }}</p>
+    {% if printer.features %}
+    <h3 style="font-size: 1.5rem; margin-bottom: 0.75rem; color: #444;">Features</h3>
+    <ul style="list-style-type: disc; padding-left: 1.5rem; color: #555; margin-bottom: 1.5rem;">
+        {% for feature in printer.features %}
+        <li style="margin-bottom: 0.5rem;">{{ feature }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="{% url 'printer' %}" style="display: inline-block; padding: 0.5rem 1rem; background-color: #007bff; color: white; text-decoration: none; border-radius: 4px; font-weight: 600; transition: background-color 0.3s ease;">&larr; Back to Printer List</a>
+</section>
+{% endblock %}

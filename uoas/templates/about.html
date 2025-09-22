@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}About Us - uoas{% endblock %}
+
+{% block content %}
+<section id="about">
+    <h2>About Us</h2>
+    <p>uoas (Universal Office Automative Solution) is committed to delivering cutting-edge technology solutions and sustainable energy services to businesses worldwide.</p>
+</section>
+
+<section id="background-experience">
+    <h2>Background Experience</h2>
+    <div class="background-content">
+        <div class="text-content">
+            <p> Universal Office Automative Solutions first opened its doors in January 1998. Over two decades later, the business has expanded its offering to encompass everything from IT services to solar power solutions.</p>
+            <p>Our growth has been spurred by our desire to be “your business partner for the future”. We have listened to what our clients need and built solutions that can help them to improve their businesses, streamline operations and minimise cost and the admin burden.</p>
+        </div>
+        <div class="image-content">
+            <img src="https://uoas.co.za/wp-content/uploads/2021/04/Universal-office-service-Awards.jpg" alt="Company Award" />
+        </div>
+    </div>
+</section>
+
+<section id="our-team" style="max-width: 900px; margin: 40px auto; padding: 0 20px;">
+    <h2>Our Team</h2>
+
+    {% regroup team_members by department as department_list %}
+
+    {% for department in department_list %}
+    <div class="team-department">
+        <h3>{{ department.grouper|title }}</h3>
+        <div class="team-members">
+            {% for member in department.list %}
+            <div class="team-member-card">
+                {% if member.image %}
+                    <img src="{{ member.image.url }}" alt="{{ member.name }}" />
+                {% else %}
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="{{ member.name }}" />
+                {% endif %}
+                <h4>{{ member.name }}</h4>
+                <p>{{ member.position }}</p>
+                <a href="mailto:{{ member.email }}">{{ member.email }}</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %}

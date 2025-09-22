@@ -1,0 +1,11 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Delete Team Member | Dashboard{% endblock %}
+{% block content %}
+    <h1>Delete Team Member</h1>
+    <p>Are you sure you want to delete "{{ team_member.name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'dashboard_team_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

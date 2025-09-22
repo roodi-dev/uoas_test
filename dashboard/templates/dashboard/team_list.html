@@ -1,0 +1,78 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Manage Team | Dashboard{% endblock %}
+{% block content %}
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <div>
+            <h1 style="margin: 0;">👥 Manage Team</h1>
+            <p style="color: #666; margin: 5px 0 0 0; font-size: 1rem;">Organize and manage your team members</p>
+        </div>
+        <a href="{% url 'dashboard_team_add' %}" class="add-link" style="margin: 0;">
+            <span style="font-size: 1.2rem; margin-right: 8px;">+</span>Add New Team Member
+        </a>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="messages{% if message.tags %} {{ message.tags }}{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    {% if team_members %}
+        <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 25px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h3 style="margin: 0; color: #2c3e50;">Team Members ({{ team_members|length }} members)</h3>
+            </div>
+
+            <div style="overflow-x: auto;">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 25%;">👤 Name</th>
+                            <th style="width: 25%;">💼 Position</th>
+                            <th style="width: 20%;">📧 Email</th>
+                            <th style="width: 15%;">🏢 Department</th>
+                            <th style="width: 15%;">⚙️ Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for member in team_members %}
+                        <tr>
+                            <td style="font-weight: 600; color: #2c3e50;">{{ member.name }}</td>
+                            <td>{{ member.position }}</td>
+                            <td>{{ member.email }}</td>
+                            <td>
+                                <span style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 4px 10px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">
+                                    {{ member.get_department_display }}
+                                </span>
+                            </td>
+                            <td class="actions">
+                                <a class="edit-btn" href="{% url 'dashboard_team_edit' member.pk %}" style="margin-right: 8px;">
+                                    ✏️ Edit
+                                </a>
+                                <a class="delete-btn" href="{% url 'dashboard_team_delete' member.pk %}">
+                                    🗑️ Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 60px 20px; background: rgba(255,255,255,0.9); border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <div style="font-size: 4rem; margin-bottom: 20px;">👥</div>
+            <h3 style="color: #2c3e50; margin-bottom: 10px;">No Team Members Yet</h3>
+            <p style="color: #666; margin-bottom: 30px;">Start building your team by adding your first team member.</p>
+            <a href="{% url 'dashboard_team_add' %}" class="add-link" style="display: inline-block;">
+                <span style="font-size: 1.2rem; margin-right: 8px;">+</span>Add Your First Team Member
+            </a>
+        </div>
+    {% endif %}
+
+    <div style="text-align: center; margin-top: 40px;">
+        <a href="{% url 'dashboard_home' %}" class="back-link">🏠 Back to Dashboard</a>
+    </div>
+{% endblock %}

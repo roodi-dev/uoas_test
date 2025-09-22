@@ -1,0 +1,90 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Dashboard Home | uoas{% endblock %}
+{% block content %}
+    <div style="text-align: center; margin-bottom: 50px;">
+        <div style="font-size: 3rem; margin-bottom: 15px;">👋</div>
+        <h1 style="margin: 0; color: #2c3e50; font-size: 2.5rem; font-weight: 700;">Welcome back, {{ manager.username }}!</h1>
+        <p style="color: #666; margin: 15px 0 0 0; font-size: 1.2rem; max-width: 600px; margin: 15px auto 0 auto;">Manage your content and monitor requests from your dashboard</p>
+    </div>
+
+    <!-- Quick Stats Section -->
+    <div style="background: rgba(255,255,255,0.9); border-radius: 20px; padding: 40px; margin-bottom: 50px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
+        <h2 style="text-align: center; color: #2c3e50; margin-bottom: 30px; font-size: 1.8rem;">📊 Dashboard Overview</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; max-width: 800px; margin: 0 auto;">
+            <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, rgba(10,61,98,0.1), rgba(26,90,122,0.1)); border-radius: 15px; border: 2px solid rgba(10,61,98,0.2);">
+                <div style="font-size: 3rem; margin-bottom: 10px;">📦</div>
+                <div style="font-size: 2.5rem; font-weight: bold; color: #0a3d62; margin-bottom: 5px;">{{ products_count|default:0 }}</div>
+                <div style="color: #666; font-size: 1rem; font-weight: 600;">Products</div>
+                <div style="color: #999; font-size: 0.9rem; margin-top: 5px;">In catalog</div>
+            </div>
+            <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, rgba(26,90,122,0.1), rgba(10,61,98,0.1)); border-radius: 15px; border: 2px solid rgba(26,90,122,0.2);">
+                <div style="font-size: 3rem; margin-bottom: 10px;">🖼️</div>
+                <div style="font-size: 2.5rem; font-weight: bold; color: #1a5a7a; margin-bottom: 5px;">{{ slides_count|default:0 }}</div>
+                <div style="color: #666; font-size: 1rem; font-weight: 600;">Slides</div>
+                <div style="color: #999; font-size: 0.9rem; margin-top: 5px;">In slideshow</div>
+            </div>
+            <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, rgba(243,156,18,0.1), rgba(230,126,34,0.1)); border-radius: 15px; border: 2px solid rgba(243,156,18,0.2);">
+                <div style="font-size: 3rem; margin-bottom: 10px;">📋</div>
+                <div style="font-size: 2.5rem; font-weight: bold; color: #f39c12; margin-bottom: 5px;">{{ quotations_count|default:0 }}</div>
+                <div style="color: #666; font-size: 1rem; font-weight: 600;">Total Quotes</div>
+                <div style="color: #999; font-size: 0.9rem; margin-top: 5px;">Customer inquiries</div>
+            </div>
+            <div style="text-align: center; padding: 25px; background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(39,174,96,0.1)); border-radius: 15px; border: 2px solid rgba(46,204,113,0.2);">
+                <div style="font-size: 3rem; margin-bottom: 10px;">👥</div>
+                <div style="font-size: 2.5rem; font-weight: bold; color: #2ecc71; margin-bottom: 5px;">{{ team_count|default:0 }}</div>
+                <div style="color: #666; font-size: 1rem; font-weight: 600;">Team Members</div>
+                <div style="color: #999; font-size: 0.9rem; margin-top: 5px;">Our team</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Management Actions -->
+    <div style="background: rgba(255,255,255,0.9); border-radius: 20px; padding: 40px; margin-bottom: 50px; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
+        <h2 style="text-align: center; color: #2c3e50; margin-bottom: 30px; font-size: 1.8rem;">⚙️ Management Actions</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; max-width: 900px; margin: 0 auto;">
+            <a href="{% url 'dashboard_product_list' %}" style="display: block; text-decoration: none; background: linear-gradient(135deg, rgba(52,152,219,0.1), rgba(41,128,185,0.1)); border: 2px solid rgba(52,152,219,0.3); border-radius: 15px; padding: 30px; text-align: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(52,152,219,0.1);">
+                <div style="font-size: 3rem; margin-bottom: 15px;">📦</div>
+                <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.4rem;">Manage Products</h3>
+                <p style="color: #666; margin: 0; font-size: 1rem; line-height: 1.4;">Add, edit, and organize your product catalog</p>
+            </a>
+            <a href="{% url 'dashboard_slide_list' %}" style="display: block; text-decoration: none; background: linear-gradient(135deg, rgba(155,89,182,0.1), rgba(142,68,173,0.1)); border: 2px solid rgba(155,89,182,0.3); border-radius: 15px; padding: 30px; text-align: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(155,89,182,0.1);">
+                <div style="font-size: 3rem; margin-bottom: 15px;">🖼️</div>
+                <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.4rem;">Manage Slides</h3>
+                <p style="color: #666; margin: 0; font-size: 1rem; line-height: 1.4;">Control your homepage slideshow content</p>
+            </a>
+            <a href="{% url 'dashboard_quotationrequest_list' %}" style="display: block; text-decoration: none; background: linear-gradient(135deg, rgba(230,126,34,0.1), rgba(211,84,0,0.1)); border: 2px solid rgba(230,126,34,0.3); border-radius: 15px; padding: 30px; text-align: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(230,126,34,0.1);">
+                <div style="font-size: 3rem; margin-bottom: 15px;">📋</div>
+                <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.4rem;">Quotation Requests</h3>
+                <p style="color: #666; margin: 0; font-size: 1rem; line-height: 1.4;">Review and respond to customer inquiries</p>
+            </a>
+            <a href="{% url 'dashboard_team_list' %}" style="display: block; text-decoration: none; background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(39,174,96,0.1)); border: 2px solid rgba(46,204,113,0.3); border-radius: 15px; padding: 30px; text-align: center; transition: all 0.3s; box-shadow: 0 4px 15px rgba(46,204,113,0.1);">
+                <div style="font-size: 3rem; margin-bottom: 15px;">👥</div>
+                <h3 style="color: #2c3e50; margin: 0 0 10px 0; font-size: 1.4rem;">Manage Team</h3>
+                <p style="color: #666; margin: 0; font-size: 1rem; line-height: 1.4;">Add and edit team members for the about page</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div style="text-align: center; margin-bottom: 50px;">
+        <h3 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.4rem;">🚀 Quick Actions</h3>
+        <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+            <a href="{% url 'dashboard_product_add' %}" style="background: linear-gradient(135deg, #0a3d62, #1a5a7a); color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(10,61,98,0.3);">
+                ➕ Add Product
+            </a>
+            <a href="{% url 'dashboard_slide_add' %}" style="background: linear-gradient(135deg, #f39c12, #e67e22); color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(243,156,18,0.3);">
+                🖼️ Add Slide
+            </a>
+            <a href="{% url 'dashboard_logout' %}" style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 12px 25px; border-radius: 25px; text-decoration: none; font-weight: 600; font-size: 1rem; transition: all 0.3s; box-shadow: 0 4px 15px rgba(231,76,60,0.3);">
+                🚪 Logout
+            </a>
+        </div>
+    </div>
+
+    <style>
+        a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15) !important;
+        }
+    </style>
+{% endblock %}

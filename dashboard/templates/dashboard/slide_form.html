@@ -1,0 +1,75 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}{{ action }} Slide | Dashboard{% endblock %}
+{% block content %}
+    <div style="max-width: 700px; margin: 0 auto;">
+        <div style="display: flex; align-items: center; margin-bottom: 30px;">
+            <div style="font-size: 2rem; margin-right: 15px;">{% if action == 'Add' %}🖼️{% else %}✏️{% endif %}</div>
+            <div>
+                <h1 style="margin: 0; color: #2c3e50;">{{ action }} Slide</h1>
+                <p style="color: #666; margin: 5px 0 0 0; font-size: 1rem;">{% if action == 'Add' %}Add a new slide to your homepage slideshow{% else %}Update slide information{% endif %}</p>
+            </div>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="messages{% if message.tags %} {{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div style="background: rgba(255,255,255,0.9); border-radius: 12px; padding: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.08);">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="{{ form.location.id_for_label }}">📍 Location</label>
+                    {{ form.location }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.image_url.id_for_label }}">🖼️ Image URL</label>
+                    {{ form.image_url }}
+                    <small style="color: #666; font-size: 0.85rem;">Enter the full URL of the image to display in the slide</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.image.id_for_label }}">📎 Upload Image</label>
+                    {{ form.image }}
+                    <small style="color: #666; font-size: 0.85rem;">Or upload an image file directly</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.project_link.id_for_label }}">🔗 Project Link</label>
+                    {{ form.project_link }}
+                    <small style="color: #666; font-size: 0.85rem;">URL where users will be redirected when clicking the slide</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.title.id_for_label }}">📄 Slide Title</label>
+                    {{ form.title }}
+                    <small style="color: #666; font-size: 0.85rem;">Optional title text to display on the slide</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.description.id_for_label }}">📝 Description</label>
+                    {{ form.description }}
+                    <small style="color: #666; font-size: 0.85rem;">Optional description text for the slide</small>
+                </div>
+
+                <div style="margin-top: 30px; display: flex; gap: 15px;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">
+                        {% if action == 'Add' %}🖼️ Create Slide{% else %}💾 Save Changes{% endif %}
+                    </button>
+                    <a href="{% url 'dashboard_slide_list' %}" class="btn btn-secondary" style="text-decoration: none;">
+                        ❌ Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="{% url 'dashboard_slide_list' %}" class="back-link">🖼️ Back to Slides</a>
+        </div>
+    </div>
+{% endblock %}

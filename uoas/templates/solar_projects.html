@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Solar Projects - uoas{% endblock %}
+
+{% block content %}
+<section id="solar-projects">
+    <h2>All Solar Projects</h2>
+    <div class="projects-grid">
+        {% for project in projects %}
+        <div class="project-card">
+            {% if project.image %}
+                <img src="{{ project.image.url }}" alt="{{ project.location }}" />
+            {% elif project.image_url %}
+                <img src="{{ project.image_url }}" alt="{{ project.location }}" />
+            {% else %}
+                <div>No image available</div>
+            {% endif %}
+            <div class="project-info">
+                <h3>{{ project.location }}</h3>
+                <a href="{{ project.project_link }}" class="view-project-link">View Project &#8594;</a>
+            </div>
+        </div>
+        {% empty %}
+        <p>No projects available at the moment.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

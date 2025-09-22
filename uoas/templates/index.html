@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Welcome to uoas{% endblock %}
+
+{% block content %}
+<section id="home">
+    <div>
+        <h2>Welcome to uoas</h2>
+        <p>Your trusted partner for innovative office solutions, solar energy, and IT services.</p>
+        <a href="contact.html" class="contact-banner-button">Contact Us</a>
+    </div>
+</section>
+
+<section id="about">
+    <h2>Why Choose Us</h2>
+    <p>Universal Office Automative Solution (uoas) is a leading company specializing in office printing, solar energy, and IT services. We are committed to delivering innovative and sustainable solutions to help your business thrive.</p>
+</section>
+
+<section id="services">
+    <h2>Our Services</h2>
+    <div class="service-grid">
+        <article class="service-card">
+            <img src="https://th.bing.com/th/id/OIP.5xc47mDQWQLtGG10X5M-LAAAAA?cb=iwp1&rs=1&pid=ImgDetMain" />
+            <h3>Office Printer Department</h3>
+            <p>Comprehensive solutions for all your office printing needs, including sales, maintenance, and support services.</p>
+            <ul class="service-list">                       
+                <li><a href="office-printer.html#Support ">Technical Support </a></li>
+                <li><a href="office-printer.html#Printers">Printers</a></li>
+                <li><a href="office-printer.html#Copiers">Copiers</a></li>
+                <li><a href="office-printer.html#Faxes">Faxes</a></li>
+            </ul>
+        </article>
+        <article class="service-card">
+            <img src="https://geoterraimage.com/wp-content/uploads/2023/02/solar-panel-photovoltaic-installation-roof-factory-sunny-blue-sky-background-alternative-electricity-source-sustainable-resources-concept-1-1-1-1_11zon-scaled.jpg" />
+            <h3>Solar Department</h3>
+            <p>Sustainable energy solutions with solar panel installations, maintenance, and consulting to reduce your carbon footprint.</p>
+            <ul class="service-list">
+                <li><a href="solar.html#installation">Panel Installation</a></li>
+                <li><a href="solar.html#systems">Solar power systems</a></li>
+                <li><a href="solar.html#maintenance">Maintenance</a></li>
+                <li><a href="solar.html#finance_arrangements">Flexible solar power finance arrangements</a></li>
+                <li><a href="solar.html#consulting">Consulting</a></li>
+            </ul>
+        </article>
+        <article class="service-card">
+            <img src="https://th.bing.com/th/id/OIP.CWe7BrXL0P1OfE5mXakISgHaE8?cb=iwp1&rs=1&pid=ImgDetMain" />
+            <h3>IT Department</h3>
+            <p>Expert IT services including network setup, cybersecurity, software development, and technical support tailored to your business.</p>
+            <ul class="service-list">
+                <li><a href="it.html#Networking & security solutions">Networking / security solutions</a></li>
+                <li><a href="it.html#Microsoft 365 & other cloud solutions">Microsoft 365 and other cloud solutions</a></li>
+                <li><a href="it.htmll#IT Support">IT Support</a></li>
+                <li><a href="it.html#IT infrastructure">IT infrastructure</a></li>
+                <li><a href="it.html#Hardware / Software">Hardware / Software</a></li>
+                <li><a href="it.html#Servers">Servers</a></li>
+                <li><a href="it.html#PABX">PABX</a></li>
+                <li><a href="it.html#IP Telephony">IP Telephony</a></li>
+                <li><a href="it.html#VOIP">VOIP</a></li>
+                <li><a href="it.html#CCTV">CCTV</a></li>
+            </ul>
+        </article>
+    </div>
+</section>
+
+<section id="partners" style="padding: 60px 20px; text-align: center; background-color: #ffffff;">
+    <h2>Our Partners</h2>
+    <div class="partner-logos" style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+        <img src="https://uoas.co.za/wp-content/uploads/2021/04/Kyocera.png" />
+        <img src="https://uoas.co.za/wp-content/uploads/2021/04/parrot.png" />
+        <img src="https://uoas.co.za/wp-content/uploads/2021/04/fortinet.png" />
+        <img src="https://uoas.co.za/wp-content/uploads/2021/04/Canon.png" alt="Parrot" />
+    </div>
+</section>
+
+<section id="contact">
+    <h2>Get in Touch</h2>
+    <p>Contact us today to learn how uoas can help your business grow.</p>
+    <form class="contact-form" action="mailto:info@uoas.com" method="post" enctype="text/plain">
+        <input type="email" name="email" placeholder="Your email address" required />
+        <button type="submit" class="contact-banner-button">Subscribe</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+{% block title %}Dashboard | {{ site_title|default:_('Django site admin') }}{% endblock %}
+{% block extrastyle %}
+<link rel="stylesheet" href="{% static 'admin-dashboard.css' %}">
+{% endblock %}
+{% block content %}
+<div class="custom-admin-dashboard">
+    <h1>Welcome to the uoas Admin Dashboard</h1>
+    <div class="dashboard-cards">
+        <div class="dashboard-card">
+            <h2>Products</h2>
+            <p><a href="/admin/printerapp/product/">Manage Products</a></p>
+        </div>
+        <div class="dashboard-card">
+            <h2>Quotation Requests</h2>
+            <p><a href="/admin/printerapp/quotationrequest/">View Quotations</a></p>
+        </div>
+        <div class="dashboard-card">
+            <h2>Slides</h2>
+            <p><a href="/admin/printerapp/slide/">Manage Slides</a></p>
+        </div>
+        <div class="dashboard-card">
+            <h2>Printers</h2>
+            <p><a href="/admin/printerapp/printer/">Manage Printers</a></p>
+        </div>
+    </div>
+    <div class="dashboard-quicklinks">
+        <h3>Quick Links</h3>
+        <ul>
+            <li><a href="/admin/auth/user/">Manage Users</a></li>
+            <li><a href="/admin/logout/">Logout</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

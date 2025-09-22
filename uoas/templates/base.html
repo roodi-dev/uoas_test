@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Welcome to uoas{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}" />
+    {% block extra_head %}{% endblock %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header>
+        <h1><a href="/dashboard/" style="color:inherit;text-decoration:none;">uoas</a></h1>
+        <nav>
+            <div class="burger-menu" id="burger-menu" aria-label="Toggle menu" role="button" tabindex="0">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <div class="nav-links" id="nav-links">
+                <button class="exit-button" id="exit-button" aria-label="Close menu">&times;</button>
+                <a href="/">Home</a>
+                <a href="/about.html">About</a>
+                <a href="/products/">Products</a>
+                <div class="dropdown">
+                    <button class="dropbtn" aria-haspopup="true" aria-expanded="false" aria-controls="services-dropdown">Services <i class="fa fa-caret-down"></i></button>
+                    <div class="dropdown-content" id="services-dropdown">
+                        <a href="/solar.html">Solar</a>
+                        <a href="/it.html">IT</a>
+                        <a href="/printer.html">Office Printer</a>
+                    </div>
+                </div>
+                <a href="/contact.html">Contact</a>
+                <a href="https://service.uoas.co.za/" class="support-call-link" target="_blank" rel="noopener noreferrer">Log a support call</a>
+            
+            </div>
+            <div class="nav-overlay" id="nav-overlay"></div>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Page content goes here -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <a href="privacy.html" style="color: #ddd; margin-right: 15px;">Privacy Policy</a>
+        &copy; 2025 uoas - Universal Office Automative Solution. All rights reserved.
+    </footer>
+
+    <script>
+        const burgerMenu = document.getElementById('burger-menu');
+        const navLinks = document.getElementById('nav-links');
+        const navOverlay = document.getElementById('nav-overlay');
+        const exitButton = document.getElementById('exit-button');
+
+        function closeMenu() {
+            navLinks.classList.remove('active');
+            burgerMenu.classList.remove('active');
+            navOverlay.classList.remove('active');
+        }
+
+        burgerMenu.addEventListener('click', () => {
+            const isActive = navLinks.classList.contains('active');
+            if (isActive) {
+                closeMenu();
+            } else {
+                navLinks.classList.add('active');
+                burgerMenu.classList.add('active');
+                navOverlay.classList.add('active');
+            }
+        });
+
+        navOverlay.addEventListener('click', () => {
+            closeMenu();
+        });
+
+        exitButton.addEventListener('click', () => {
+            closeMenu();
+        });
+
+        // Close menu when a nav link is clicked (optional)
+        const navLinkElements = document.querySelectorAll('.nav-links a');
+        navLinkElements.forEach(link => {
+            link.addEventListener('click', () => {
+                closeMenu();
+            });
+        });
+
+        // Dropdown toggle for all .dropbtn (desktop and mobile)
+        document.querySelectorAll('.dropbtn').forEach(dropbtn => {
+            const dropdownContent = dropbtn.parentElement.querySelector('.dropdown-content');
+            dropbtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                // Close other open dropdowns
+                document.querySelectorAll('.dropdown-content.show').forEach(dc => {
+                    if (dc !== dropdownContent) dc.classList.remove('show');
+                });
+                document.querySelectorAll('.dropbtn.active').forEach(db => {
+                    if (db !== dropbtn) db.classList.remove('active');
+                });
+                dropdownContent.classList.toggle('show');
+                dropbtn.classList.toggle('active');
+                dropbtn.setAttribute('aria-expanded', dropdownContent.classList.contains('show'));
+            });
+        });
+        // Close dropdown if clicked outside
+        document.addEventListener('click', (e) => {
+            document.querySelectorAll('.dropdown-content').forEach(dc => dc.classList.remove('show'));
+            document.querySelectorAll('.dropbtn').forEach(db => db.classList.remove('active'));
+        });
+    </script>
+</body>
+</html>

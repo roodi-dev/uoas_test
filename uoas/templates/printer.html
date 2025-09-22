@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block title %}Office Printer Department - uoas{% endblock %}
+
+{% block content %}
+<section id="hero-office-printer" role="region" aria-label="Office Printer Department Introduction">
+    <div class="hero-office-printer-content">
+        <h2>Office Printer Department</h2>
+        
+    </div>
+</section>
+<main role="main">
+    <section class="service-grid" aria-label="Small Business Solutions">
+        <div class="service-content">
+            <div class="service-text">
+                <h3>Small Business Solutions</h3>
+                <p>Explore our compact and efficient printing solutions tailored for small businesses to enhance productivity and reduce costs.</p>
+            </div>
+            <div class="solution-cards" role="list">
+                {% for printer in printers_small %}
+                <article class="solution-card" role="listitem">
+                    <img src="{{ printer.image_url }}" alt="{{ printer.name }} printer" />
+                    <h4>{{ printer.name }}</h4>
+                    <a href="{% url 'printer_detail' printer.pk %}" class="learn-more-btn" aria-label="Learn more about {{ printer.name }}">Learn More</a>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="service-grid" aria-label="Large Business Solutions">
+        <div class="service-content">
+            <div class="service-text">
+                <h3>Large Business Solutions</h3>
+                <p>Discover high-capacity and networked printing solutions designed to meet the demands of large enterprises.</p>
+            </div>
+            <div class="solution-cards" role="list">
+                {% for printer in printers_large %}
+                <article class="solution-card" role="listitem">
+                    <img src="{{ printer.image_url }}" alt="{{ printer.name }} printer" />
+                    <h4>{{ printer.name }}</h4>
+                    <a href="{% url 'printer_detail' printer.pk %}" class="learn-more-btn" aria-label="Learn more about {{ printer.name }}">Learn More</a>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section class="service-grid" aria-label="Other Printing Solutions">
+        <div class="service-content">
+            <div class="service-text">
+                <h3>Other Printing Solutions</h3>
+                <p>Explore specialized printing options for unique business needs and labeling solutions.</p>
+            </div>
+            <div class="solution-cards" role="list">
+                {% for printer in printers_other %}
+                <article class="solution-card" role="listitem">
+                    <img src="{{ printer.image_url }}" alt="{{ printer.name }} printer" />
+                    <h4>{{ printer.name }}</h4>
+                    <a href="{% url 'printer_detail' printer.pk %}" class="learn-more-btn" aria-label="Learn more about {{ printer.name }}">Learn More</a>
+                </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

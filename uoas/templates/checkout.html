@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block title %}Checkout | uoas{% endblock %}
+{% block content %}
+<h2>Checkout</h2>
+{% if cart_items %}
+<div class="checkout-container">
+    <section class="order-summary">
+        <h3>Order Summary</h3>
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Image</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>
+                        {% if item.product.image_url %}
+                            <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" class="cart-product-img" />
+                        {% else %}
+                            <span style="color:#aaa;">No image</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ item.quantity }}</td>
+                    <td>R{{ item.product.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p class="cart-total"><strong>Cart Total:</strong> R{{ cart_total }}</p>
+    </section>
+
+    <section class="checkout-form-section">
+        <h3>Billing Information</h3>
+        <form method="post" class="checkout-form">
+            {% csrf_token %}
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="address">Delivery Address:</label>
+            <textarea id="address" name="address" required></textarea>
+
+            <h3>Shipping Options</h3>
+            <label>
+                <input type="radio" name="shipping_method" value="standard" required>
+                Standard Shipping (5-7 days)
+            </label>
+            <label>
+                <input type="radio" name="shipping_method" value="express" required>
+                Express Shipping (2-3 days)
+            </label>
+
+            <h3>Payment Method</h3>
+            <label>
+                <input type="radio" name="payment_method" value="credit_card" required>
+                Credit Card
+            </label>
+            <label>
+                <input type="radio" name="payment_method" value="paypal" required>
+                PayPal
+            </label>
+
+            <label>
+                <input type="checkbox" name="terms" required>
+                I agree to the <a href="/terms.html" target="_blank">terms and conditions</a>
+            </label>
+
+            <button type="submit">Place Order</button>
+        </form>
+    </section>
+</div>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

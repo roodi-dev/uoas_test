@@ -1,0 +1,97 @@
+body.custom-admin-dashboard {
+    background: #f4f7fa;
+}
+.custom-admin-dashboard {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 30px 20px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(10,61,98,0.10);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.custom-admin-dashboard h1 {
+    color: #0a3d62;
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 32px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+.dashboard-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+.dashboard-card {
+    background: linear-gradient(135deg, #007acc, #0a3d62);
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,90,153,0.10);
+    padding: 32px 28px;
+    min-width: 220px;
+    flex: 1 1 220px;
+    max-width: 260px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.dashboard-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,90,153,0.18);
+}
+.dashboard-card h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+}
+.dashboard-card a {
+    color: #fff;
+    font-weight: 600;
+    text-decoration: underline;
+    font-size: 1.1rem;
+}
+.dashboard-quicklinks {
+    margin-top: 30px;
+    text-align: center;
+}
+.dashboard-quicklinks h3 {
+    color: #0a3d62;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.dashboard-quicklinks ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+}
+.dashboard-quicklinks li {
+    display: inline-block;
+}
+.dashboard-quicklinks a {
+    color: #007acc;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+.dashboard-quicklinks a:hover {
+    color: #f39c12;
+    text-decoration: underline;
+}
+@media (max-width: 900px) {
+    .dashboard-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    .dashboard-card {
+        max-width: 100%;
+        width: 100%;
+    }
+}

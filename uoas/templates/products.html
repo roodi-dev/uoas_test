@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Products | uoas{% endblock %}
+{% block content %}
+<h2>Products</h2>
+<div class="products-list">
+    {% for product in products %}
+    <a href="{% url 'product_detail' product.id %}" class="product-card-link">
+        <div class="product-card">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="product-image" />
+            {% elif product.image_url %}
+                <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image" />
+            {% else %}
+                <div class="product-image-placeholder">📦<br>No Image</div>
+            {% endif %}
+            <h3>{{ product.name }}</h3>
+        </div>
+    </a>
+    {% empty %}
+    <p>No products available.</p>
+    {% endfor %}
+</div>
+{% endblock %}

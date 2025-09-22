@@ -1,0 +1,82 @@
+{% extends 'dashboard/base.html' %}
+{% block title %}Manager Login | uoas Dashboard{% endblock %}
+{% block content %}
+    <div style="min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 20px;">
+        <div style="max-width: 450px; width: 100%; background: rgba(255,255,255,0.95); border-radius: 20px; padding: 40px; box-shadow: 0 10px 40px rgba(0,0,0,0.15);">
+
+            <!-- Header -->
+            <div style="text-align: center; margin-bottom: 40px;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">🔐</div>
+                <h1 style="margin: 0; color: #2c3e50; font-size: 2rem; font-weight: 700;">Manager Login</h1>
+                <p style="color: #666; margin: 10px 0 0 0; font-size: 1rem;">Access your dashboard to manage content</p>
+            </div>
+
+            <!-- Back to Homepage Button -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <a href="/" class="back-link" style="font-weight: 700; font-size: 1rem;">← Back to Homepage</a>
+            </div>
+
+            <!-- Error Messages -->
+            {% if messages %}
+                <div style="background: linear-gradient(135deg, #e74c3c, #c0392b); color: white; padding: 15px; border-radius: 12px; margin-bottom: 25px; text-align: center;">
+                    {% for message in messages %}
+                        <div style="font-weight: 600;">{{ message }}</div>
+
+                        {% endfor %}
+                </div>
+            {% endif %}
+
+            <!-- Login Form -->
+            <form method="post">
+                {% csrf_token %}
+
+                <div style="margin-bottom: 25px;">
+                    <label for="username" style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 8px; font-size: 1rem;">
+                        👤 Username
+                    </label>
+                    <input type="text" id="username" name="username" required autofocus
+                           style="width: 100%; padding: 15px; border: 2px solid #e1e8ed; border-radius: 12px; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s; background: rgba(255,255,255,0.8);"
+                           placeholder="Enter your username">
+                </div>
+
+                <div style="margin-bottom: 30px;">
+                    <label for="password" style="display: block; font-weight: 600; color: #2c3e50; margin-bottom: 8px; font-size: 1rem;">
+                        🔒 Password
+                    </label>
+                    <input type="password" id="password" name="password" required
+                           style="width: 100%; padding: 15px; border: 2px solid #e1e8ed; border-radius: 12px; font-size: 1rem; box-sizing: border-box; transition: border-color 0.3s; background: rgba(255,255,255,0.8);"
+                           placeholder="Enter your password">
+                </div>
+
+                <button type="submit"
+                        style="width: 100%; background: linear-gradient(135deg, #0a3d62, #1a5a7a); color: white; border: none; border-radius: 12px; padding: 16px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(10,61,98,0.3);">
+                    🚀 Sign In to Dashboard
+                </button>
+            </form>
+
+            <!-- Footer -->
+            <div style="text-align: center; margin-top: 30px; padding-top: 25px; border-top: 1px solid #e1e8ed;">
+                <p style="color: #666; font-size: 0.9rem; margin: 0;">
+                    Secure access to your content management system
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        input:focus {
+            outline: none;
+            border-color: #0a3d62 !important;
+            box-shadow: 0 0 0 3px rgba(10,61,98,0.1);
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(10,61,98,0.4);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+{% endblock %}

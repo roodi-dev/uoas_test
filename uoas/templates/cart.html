@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Your Cart | uoas{% endblock %}
+{% block content %}
+<div class="cart-container">
+<h2>Your Cart</h2>
+{% if cart_items %}
+<table class="cart-table">
+    <thead>
+        <tr>
+            <th>Product</th>
+            <th>Image</th>
+            <th>Quantity</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item.product.name }}</td>
+            <td>
+                {% if item.product.image_url %}
+                    <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" class="cart-product-img" />
+                {% else %}
+                    <span style="color:#aaa;">No image</span>
+                {% endif %}
+            </td>
+            <td>
+                <form method="post" action="/cart/update/{{ item.id }}/" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" style="width:50px;" />
+                    <button type="submit">Update</button>
+                </form>
+                <form method="post" action="/cart/remove/{{ item.id }}/" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="remove-btn">Remove</button>
+                </form>
+            </td>
+            <td>R{{ item.product.price }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<p class="cart-total"><strong>Cart Total:</strong> R{{ cart_total }}</p>
+<form method="post" action="/checkout/">
+    {% csrf_token %}
+    <button type="submit" class="checkout-btn">Proceed to Checkout</button>
+</form>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+</div>
+{% endblock %}
