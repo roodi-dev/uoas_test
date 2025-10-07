@@ -82,7 +82,7 @@ def manager_login(request):
         password = request.POST.get('password')
         try:
             manager = Manager.objects.get(username=username, is_active=True)
-            if password == manager.password:
+            if check_password(password, manager.password):
                 request.session['manager_id'] = manager.id
                 return redirect('dashboard_home')
             else:

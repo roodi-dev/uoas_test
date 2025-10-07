@@ -8,7 +8,6 @@ sqlparse==0.5.1
 tzdata==2024.1
 
 # Development Dependencies
-pip==25.2
 virtualenv==20.26.3
 
 # Optional: Database drivers (uncomment based on your database choice)
